@@ -1,0 +1,23 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTxtViewStyle" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="AppTxtViewStyle.Title">
+        <item name="android:textSize">@dimen/item_text_size_title</item>
+    </style>
+
+    <style name="AppTxtViewStyle.Info">
+        <item name="android:textSize">@dimen/item_text_size_info</item>
+    </style>
+
+</resources>

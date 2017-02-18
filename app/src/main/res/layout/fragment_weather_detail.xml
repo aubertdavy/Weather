@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        style="@style/AppTxtViewStyle.Title"
+        android:id="@+id/txt_date"
+        tools:text="2017-02-17 12:00:00"/>
+
+    <TextView
+        style="@style/AppTxtViewStyle.Info"
+        android:id="@+id/txt_temp"
+        android:paddingTop="@dimen/item_padding"
+        tools:text="Température 28.18° (Min : 283.179°, Max : 283.18°)"/>
+
+    <TextView
+        style="@style/AppTxtViewStyle.Info"
+        android:id="@+id/txt_temp_day"
+        android:paddingTop="@dimen/item_padding"
+        tools:text="Journée 10°, après-midi 20° et soirée 30°"/>
+
+    <TextView
+        style="@style/AppTxtViewStyle.Info"
+        android:id="@+id/txt_pressure"
+        android:paddingTop="@dimen/item_padding"
+        tools:text="Pression atmosphérique 10.25"/>
+
+    <TextView
+        style="@style/AppTxtViewStyle.Info"
+        android:id="@+id/txt_humidity"
+        android:paddingTop="@dimen/item_padding"
+        tools:text="Humidité 96%"/>
+
+    <TextView
+        style="@style/AppTxtViewStyle.Info"
+        android:id="@+id/txt_speed"
+        android:paddingTop="@dimen/item_padding"
+        tools:text="Vitesse 21"/>
+
+</LinearLayout>
