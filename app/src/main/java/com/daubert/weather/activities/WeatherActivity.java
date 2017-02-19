@@ -21,15 +21,31 @@ public class WeatherActivity extends AppCompatActivity implements WeatherListFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_main_place_holder, WeatherListFragment.newInstance());
+        ft.commit();
     }
 
     @Override
-    public void onRssItemSelected(Weather weather) {
-        FrameLayout placeHolder = (FrameLayout)findViewById(R.id.fragment_place_holder);
-        if (placeHolder != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_place_holder, WeatherDetailFragment.newInstance(weather));
-            ft.commit();
+    public void onBackPressed() {
+      if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+          getSupportFragmentManager().popBackStack();
+      } else {
+          super.onBackPressed();
+      }
+  }
+
+    @Override
+    public void onItemSelected(Weather weather) {
+        int resId = R.id.fragment_main_place_holder;
+        if ((FrameLayout) findViewById(R.id.fragment_detail_place_holder) != null) {
+            resId = R.id.fragment_detail_place_holder;
         }
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(resId, WeatherDetailFragment.newInstance(weather));
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

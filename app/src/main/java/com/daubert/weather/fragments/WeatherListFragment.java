@@ -32,21 +32,27 @@ import java.util.ArrayList;
 public class WeatherListFragment extends BaseWeatherFragment {
     private static final String TAG = WeatherListFragment.class.getSimpleName();
     private static final String URL_ICON = "http://openweathermap.org/img/w/";
-    private static final String URL_WEATHER_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Paris&units=metric&cnt=5&appid=";
+    private static final String URL_WEATHER_API = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Paris&units=metric&cnt=20&appid=";
 
+    private Context ctx;
     private OnItemSelectedListener mListener;
     private ArrayList<Weather> mArrWeather;
     private ListView mList;
 
     public interface OnItemSelectedListener {
-        void onRssItemSelected(Weather weather);
+        void onItemSelected(Weather weather);
+    }
+
+    public static WeatherListFragment newInstance() {
+        return new WeatherListFragment();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnItemSelectedListener) {
-            mListener = (OnItemSelectedListener) context;
+        ctx = context;
+        if (ctx instanceof OnItemSelectedListener) {
+            mListener = (OnItemSelectedListener)ctx;
         } else {
             throw new ClassCastException(context.toString()  +
                     " doit implémenter WeatherListFragment.OnItemSelectedListener");
@@ -71,7 +77,7 @@ public class WeatherListFragment extends BaseWeatherFragment {
             mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    mListener.onRssItemSelected(mArrWeather.get(position));
+                    mListener.onItemSelected(mArrWeather.get(position));
                 }
             });
         }
@@ -108,11 +114,11 @@ public class WeatherListFragment extends BaseWeatherFragment {
                         mArrWeather.add(weather);
                     }
 
-                    mList.setAdapter(new WeatherAdapter(getContext(), mArrWeather));
+                    mList.setAdapter(new WeatherAdapter(ctx, mArrWeather));
 
                 } catch (JSONException error) {
                     VolleyLog.e(TAG, error.getMessage());
-                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -120,7 +126,7 @@ public class WeatherListFragment extends BaseWeatherFragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, error.getMessage());
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

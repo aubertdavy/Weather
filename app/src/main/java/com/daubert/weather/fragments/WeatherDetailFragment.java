@@ -19,16 +19,7 @@ public class WeatherDetailFragment extends BaseWeatherFragment {
     public static WeatherDetailFragment newInstance(Weather weather) {
         WeatherDetailFragment weatherDetailFragment = new WeatherDetailFragment();
         Bundle args = new Bundle();
-        args.putString(API_KEY_DATE, weather.getDate());
-        args.putString(API_KEY_SPEED, weather.getSpeed());
-        args.putString(API_KEY_NIGHT, weather.getTempNight());
-        args.putString(API_KEY_TEMP_DAY, weather.getTempDay());
-        args.putString(API_KEY_TEMP_MAX, weather.getTempMax());
-        args.putString(API_KEY_TEMP_MIN, weather.getTempMin());
-        args.putString(API_KEY_HUMIDITY, weather.getHumidity());
-        args.putString(API_KEY_PRESSURE, weather.getPressure());
-        args.putString(API_KEY_MORNING, weather.getTempMorning());
-        args.putString(API_KEY_EVENING, weather.getTempEvening());
+        args.putParcelable("parcelable", weather);
         weatherDetailFragment.setArguments(args);
         return weatherDetailFragment;
     }
@@ -40,13 +31,15 @@ public class WeatherDetailFragment extends BaseWeatherFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ((TextView)view.findViewById(R.id.txt_date)).setText(getArguments().getString(API_KEY_DATE));
-        ((TextView)view.findViewById(R.id.txt_temp)).setText("Température " + getArguments().getString(API_KEY_TEMP_DAY) + "° (Max " +  getArguments().getString(API_KEY_TEMP_MAX) +
-                "°, Min " + getArguments().getString(API_KEY_TEMP_MIN) + "°)");
-        ((TextView)view.findViewById(R.id.txt_temp_day)).setText("Matin " + getArguments().getString(API_KEY_MORNING) + "°, Midi " +  getArguments().getString(API_KEY_TEMP_MAX) +
-                "°, Soirée " + getArguments().getString(API_KEY_TEMP_MIN) + "°");
-        ((TextView)view.findViewById(R.id.txt_pressure)).setText("Pression atmosphérique " + getArguments().getString(API_KEY_PRESSURE));
-        ((TextView)view.findViewById(R.id.txt_humidity)).setText("Humditité " + getArguments().getString(API_KEY_HUMIDITY) + "%");
-        ((TextView)view.findViewById(R.id.txt_speed)).setText("Vitesse " + getArguments().getString(API_KEY_SPEED));
+        Weather weather = getArguments().getParcelable("parcelable");
+        if (weather == null)
+            return;
+
+        ((TextView)view.findViewById(R.id.txt_date)).setText(weather.getDate());
+        ((TextView)view.findViewById(R.id.txt_speed)).setText("Vitesse " + weather.getSpeed());
+        ((TextView)view.findViewById(R.id.txt_humidity)).setText("Humditité " + weather.getHumidity() + "%");
+        ((TextView)view.findViewById(R.id.txt_pressure)).setText("Pression atmosphérique " + weather.getHumidity());
+        ((TextView)view.findViewById(R.id.txt_temp)).setText("Température " + weather.getTempDay() + "° (Max " +  weather.getTempMax() + "°, Min " + weather.getTempMin() + "°)");
+        ((TextView)view.findViewById(R.id.txt_temp_day)).setText("Matin " + weather.getTempMorning() + "°, Midi " +  weather.getTempEvening() + "°, Soirée " + weather.getTempNight() + "°");
     }
 }

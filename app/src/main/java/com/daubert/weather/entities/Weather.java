@@ -1,5 +1,8 @@
 package com.daubert.weather.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.daubert.weather.helpers.DateHelper;
 
 /**
@@ -7,7 +10,7 @@ import com.daubert.weather.helpers.DateHelper;
  */
 
 
-public class Weather {
+public class Weather implements Parcelable {
     private String mDt;
     private String mSpeed;
     private String mTempDay;
@@ -111,4 +114,27 @@ public class Weather {
     public String getTempNight() {
         return mTempNight;
     }
+
+    public Weather() {}
+
+    public Weather(Parcel read) {}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {}
+
+    public static final Parcelable.Creator<Weather> CREATOR = new Parcelable.Creator<Weather>() {
+                @Override
+                public Weather createFromParcel(Parcel source) {
+                    return new Weather(source);
+                }
+                @Override
+                public Weather[] newArray(int size) {
+                    return new Weather[size];
+                }
+            };
 }

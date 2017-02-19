@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
     android:orientation="vertical">
 
-    <fragment
-        android:name="com.daubert.weather.fragments.WeatherListFragment"
-        android:id="@+id/fooFragment"
+    <FrameLayout
+        android:id="@+id/fragment_main_place_holder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_weather_list" />
+        android:layout_height="match_parent">
+    </FrameLayout>
 
 </LinearLayout>
